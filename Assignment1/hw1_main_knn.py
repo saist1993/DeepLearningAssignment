@@ -54,6 +54,9 @@ if user_input == str(1):
     '''
         This loads the whole dataset and then tests the KNN on MNSIT dataset.
         The reported accuracy is around 95%
+        (10000, 60000)
+        96.91 of test examples classified correctly.
+        --- 4001.72104478 seconds ---
     '''
     start_time = time.time()
     accuracy = reshape_predict(X_train,y_train,X_test,y_test)
