@@ -51,13 +51,19 @@ X_train, y_train = load_mnist('training')
 X_test, y_test = load_mnist('testing')
 
 if user_input == str(1):
+    '''
+        This loads the whole dataset and then tests the KNN on MNSIT dataset.
+        The reported accuracy is around 95%
+    '''
     start_time = time.time()
     accuracy = reshape_predict(X_train,y_train,X_test,y_test)
     print '{0:0.02f}'.format(accuracy), "of test examples classified correctly."
     print("--- %s seconds ---" % (time.time() - start_time))
 
 if user_input == str(2):
-    #randomly shuffle X_train and Y_train and then take first 100 required sample.
+    '''
+        Randomly shuffle X_train and Y_train and then take first 100 required sample.
+    '''
     s = np.arange(X_train.shape[0])
     np.random.shuffle(s)
     X_train = X_train[s]
@@ -86,12 +92,22 @@ if user_input == str(2):
     X_train = np.array(new_X_train)
     y_train = np.array(new_Y_train)
 
+
     accuracy, confusion_matrix = reshape_predict(X_train,y_train, X_test, y_test,confusion=True)
     print '{0:0.02f}'.format(accuracy), "of test examples classified correctly."
     print confusion_matrix
 
+    accuracy = []
+    for k in xrange(0,5):
+        accuracy.append(reshape_predict(X_train,y_train, X_test, y_test,confusion=False,k=k+1))
+    k = [x+1 for x in xrange(0,5)]
+    plt.plot(accuracy,k)
+    plt.show()
+
 if user_input == str(3):
-    #randomly shuffle X_train and Y_train and then take first 100 required sample.
+    '''
+        This cross validates and creates multiple value of k
+    '''
     print "executing the k-fold task"
     s = np.arange(X_train.shape[0])
     np.random.shuffle(s)
@@ -117,7 +133,6 @@ if user_input == str(3):
             sample_set[y_train[i]] = 1
             new_X_train.append(X_train[i])
             new_Y_train.append(y_train[i])
-
     X_train = np.array(new_X_train)
     y_train = np.array(new_Y_train)
     start_time = time.time()
@@ -132,6 +147,7 @@ if user_input == str(3):
     #still need to test the function
     plt.plot(accuracy,k)
     plt.show()
+    #Time required - 241.686
     # [58.358333333333334, 35.806666666666665, 29.791666666666664, 27.41833333333334, 25.994999999999997,
     #  23.239999999999998, 22.66, 21.876666666666665, 20.890000000000001, 19.140000000000001, 18.119999999999997,
     #  17.883333333333333, 17.350000000000001, 16.971666666666668, 16.801666666666666]

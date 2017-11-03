@@ -52,15 +52,8 @@ def predict_labels( dists, labels, k=1):
     for index in dists:
         #Create a tuple and then sort sort the array and select top k candidates
         s = np.argsort(index)
-        # print index
         temp1= index[s]
-        # print "*************"
-        # print index
-        # print s
         temp = labels[s][:k]
-        # print temp
-        # raw_input()
         pred_label.append(collections.Counter(temp).most_common()[0][0])
     pred_label = np.array(pred_label)
-    print pred_label.shape
     return pred_label

@@ -30,7 +30,6 @@ X_test = np.reshape(X_test, (X_test.shape[0], -1))
 # Test on test data   
 #1) Compute distances:
 dists =  mlBasics.compute_euclidean_distances(X_train,X_test)
-print "I am here"
   
 #2) Run the code below and predict labels: 
 y_test_pred = mlBasics.predict_labels(dists, y_train)
