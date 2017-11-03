@@ -43,7 +43,7 @@ def l2loss(X, y, W, b):
 
     gradient_w = 0  # initializing the gradient w.r.t. weight
     gradient_b = 0  # initializing the gradient w.r.t. bias
-    V = predict(X, W, b)
+    V = predict(X, W, b)    # temp variable
 
     L_w_b = np.sum(np.square(y - V))  # the l2 loss function value
 
@@ -66,16 +66,17 @@ def train(X, y, W, b, num_iters=1000, eta=0.001):
 
     Should return the final values of W and b
     """
-    L_p = []
-    num_iters_p = np.arange(0,1000,1)
+
+    L_p = []    # initializing list of loss values for plotting (i.e. Y-axis)
+    num_iters_p = np.arange(0,1000,1)   # time (i.e. X-axis)
 
     for j in xrange(num_iters):
         L, g_w, g_b = l2loss(X, y, W, b)
 
-        W -= (eta * g_w)    #new weights
-        b -= (eta * g_b)    #new bias
+        W -= (eta * g_w)    # new weights
+        b -= (eta * g_b)    # new bias
 
-        L_p.append(L)
+        L_p.append(L)   # appending the value of L computed in each iteration to complete the list L_p
 
     plt.plot(num_iters_p, L_p)
     plt.show()
