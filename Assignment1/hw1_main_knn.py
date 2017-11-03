@@ -5,14 +5,13 @@ Created on
 @author: fame
 """
 
-from load_mnist import *
-import hw1_knn  as mlBasics
+import time
 import numpy as np
 from sklearn.metrics import confusion_matrix
-
-# Load data - two class
-# X_train, y_train = load_mnist('training' , [0,1] )
-# X_test, y_test = load_mnist('testing'  ,  [0,1]  )
+#loading internal files
+from load_mnist import *
+import hw1_knn  as mlBasics
+import matplotlib.pyplot as plt
 
 
 def reshape_predict(X_train,y_train,X_test,y_test,confusion=False,k=1):
@@ -51,9 +50,11 @@ user_input = raw_input('enter question ')
 X_train, y_train = load_mnist('training')
 X_test, y_test = load_mnist('testing')
 
-if user_input == 1:
+if user_input == str(1):
+    start_time = time.time()
     accuracy = reshape_predict(X_train,y_train,X_test,y_test)
     print '{0:0.02f}'.format(accuracy), "of test examples classified correctly."
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 if user_input == str(2):
     #randomly shuffle X_train and Y_train and then take first 100 required sample.
@@ -119,11 +120,18 @@ if user_input == str(3):
 
     X_train = np.array(new_X_train)
     y_train = np.array(new_Y_train)
+    start_time = time.time()
     accuracy = []
     for k in xrange(0,15):
         accuracy.append(five_fold_cross(X_train,y_train,k=k+1))
         print "done with ", k+1
-    print
+    print accuracy
+    print np.mean(np.array(accuracy))
+    print("--- %s seconds ---" % (time.time() - start_time))
+    k = [x for x in xrange(15)]
+    #still need to test the function
+    plt.plot(accuracy,k)
+    plt.show()
     # [58.358333333333334, 35.806666666666665, 29.791666666666664, 27.41833333333334, 25.994999999999997,
     #  23.239999999999998, 22.66, 21.876666666666665, 20.890000000000001, 19.140000000000001, 18.119999999999997,
     #  17.883333333333333, 17.350000000000001, 16.971666666666668, 16.801666666666666]
