@@ -22,7 +22,7 @@ W0 = np.zeros(X_train.shape[1])
 b0 = 0
 
 # Optimization
-num_iters = 1000
+num_iters = 100
 eta = 0.001
 W, b = mlBasics.train(X_train, y_train, W0, b0, num_iters, eta)
 

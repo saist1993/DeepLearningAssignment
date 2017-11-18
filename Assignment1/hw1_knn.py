@@ -57,3 +57,4 @@ def predict_labels( dists, labels, k=1):
         pred_label.append(collections.Counter(temp).most_common()[0][0])
     pred_label = np.array(pred_label)
     return pred_label
+

@@ -76,9 +76,9 @@ def train(X, y, W, b, num_iters=1000, eta=0.001):
         W -= (eta * g_w)    # new weights
         b -= (eta * g_b)    # new bias
 
-        L_p.append(L)   # appending the value of L computed in each iteration to complete the list L_p
+      #  L_p.append(L)   # appending the value of L computed in each iteration to complete the list L_p
 
-    plt.plot(num_iters_p, L_p)
-    plt.show()
+    #plt.plot(num_iters_p, L_p)
+    #plt.show()
 
     return W, b

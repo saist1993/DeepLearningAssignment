@@ -152,6 +152,37 @@ if user_input == str(3):
     plt.show()
     #Time required - 241.686
     # [58.358333333333334, 35.806666666666665, 29.791666666666664, 27.41833333333334, 25.994999999999997,
-    #  23.239999999999998, 22.66, 21.876666666666665, 20.890000000000001, 19.140000000000001, 18.119999999999997,
-    #  17.883333333333333, 17.350000000000001, 16.971666666666668, 16.801666666666666]
+    #  23.239999999999998, 22.66, 21.876666666666665, 20.890000000000001, 19.140000000000001, 18.
+
+if user_input == str(4):
+    s = np.arange(X_train.shape[0])
+    np.random.shuffle(s)
+    X_train = X_train[s]
+    y_train - y_train[s]
+
+    sample_set = {}
+    new_X_train = []
+    new_Y_train = []
+
+
+    for i in xrange(0,len(y_train)):
+        try:
+            count = sample_set[y_train[i]]
+            if count >= 100:
+                continue
+            else:
+                new_X_train.append(X_train[i])
+                new_Y_train.append(y_train[i])
+                sample_set[y_train[i]] = sample_set[y_train[i]] + 1
+        except:
+            # print len(sample_set)
+            sample_set[y_train[i]] = 1
+            new_X_train.append(X_train[i])
+            new_Y_train.append(y_train[i])
+
+    X_train = np.array(new_X_train)
+    y_train = np.array(new_Y_train)
+
+
+
 
